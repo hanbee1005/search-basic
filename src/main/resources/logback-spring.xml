@@ -84,6 +84,8 @@
     </appender>
 
     <springProfile name="dev">
+        <logger name="org.springframework" level="INFO" />
+        <logger name="inc.bfactory.kpop" level="INFO"/>
         <root level="INFO">
             <appender-ref ref="FILE"/>
             <appender-ref ref="ASYNC_AWS_LOGS" />
