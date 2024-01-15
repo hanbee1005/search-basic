@@ -1,8 +1,10 @@
 package com.example.searchbasic;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
 public class SearchController {
     private final SearchService searchService;
@@ -13,6 +15,7 @@ public class SearchController {
 
     @PostMapping("/search")
     public SearchKeywordDto search(String keyword) {
+        log.info("[SearchController.search] keyword = {}", keyword);
         return searchService.save(keyword);
     }
 
