@@ -27,7 +27,7 @@ class SearchServiceTest {
         String keyword = "없는 검색어";
 
         //given
-        given(searchKeywordRepository.findById(keyword)).willReturn(Optional.empty());
+        given(searchKeywordRepository.findForUpdateByKeyword(keyword)).willReturn(Optional.empty());
         given(searchKeywordRepository.save(any(SearchKeyword.class))).willAnswer(invocation -> invocation.getArguments()[0]);
 
         //when
@@ -39,13 +39,13 @@ class SearchServiceTest {
     }
 
     @Test
-    @DisplayName("없는 검색 키워드가 검색되는 케이스")
+    @DisplayName("존재하는 키워드가 검색되는 케이스")
     void exist_keyword() {
         String keyword = "존재하는 검색어";
         Long searchCnt = 22L;
 
         //given
-        given(searchKeywordRepository.findById(keyword)).willReturn(Optional.of(new SearchKeyword(keyword, searchCnt)));
+        given(searchKeywordRepository.findForUpdateByKeyword(keyword)).willReturn(Optional.of(new SearchKeyword(keyword, searchCnt)));
         given(searchKeywordRepository.save(any(SearchKeyword.class))).willAnswer(invocation -> invocation.getArguments()[0]);
 
         //when

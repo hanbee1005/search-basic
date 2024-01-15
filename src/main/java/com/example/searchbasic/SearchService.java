@@ -13,7 +13,9 @@ public class SearchService {
 
     @Transactional
     public SearchKeywordDto save(String keyword) {
-        SearchKeyword searchKeyword = searchKeywordRepository.findById(keyword).orElse(new SearchKeyword(keyword, 0L));
+        SearchKeyword searchKeyword = searchKeywordRepository.findForUpdateByKeyword(keyword)
+                .orElse(new SearchKeyword(keyword, 0L));
+
         searchKeyword.increaseSearchCnt();
         return new SearchKeywordDto(searchKeywordRepository.save(searchKeyword));
     }
