@@ -10,6 +10,6 @@ import java.util.Optional;
 
 public interface SearchKeywordRepository extends JpaRepository<SearchKeyword, String> {
     @Lock(LockModeType.PESSIMISTIC_WRITE)
-    @QueryHints({@QueryHint(name ="javax.persistence.lock.timeout", value = "10000")})
+    @QueryHints({@QueryHint(name ="jakarta.persistence.lock.timeout", value = "10000")})
     Optional<SearchKeyword> findForUpdateByKeyword(String keyword);
 }
