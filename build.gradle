@@ -29,6 +29,9 @@ dependencies {
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'com.h2database:h2'
 
+    // cache
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
+
     // log
     // 로그백 의존성
     implementation 'ca.pjer:logback-awslogs-appender:1.6.0'
