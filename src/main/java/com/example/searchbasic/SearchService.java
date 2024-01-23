@@ -1,6 +1,7 @@
 package com.example.searchbasic;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -11,6 +12,15 @@ public class SearchService {
 
     public SearchService(SearchKeywordRepository searchKeywordRepository) {
         this.searchKeywordRepository = searchKeywordRepository;
+    }
+
+    @Cacheable(value = "keywordCount", key = "#keyword")
+    @Transactional(readOnly = true)
+    public SearchKeywordDto getCount(String keyword) {
+        SearchKeyword searchKeyword = searchKeywordRepository.findById(keyword)
+                .orElseThrow(() -> new IllegalArgumentException("Not Found keyword=" + keyword));
+
+        return new SearchKeywordDto(searchKeyword);
     }
 
     @Transactional
